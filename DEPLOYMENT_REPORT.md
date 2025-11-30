@@ -25,7 +25,7 @@ The AGI MCP Server has been successfully deployed from Mac Studio to the local s
 ## What Was Accomplished
 
 ### ✅ Phase 1: Source Verification (09:42)
-- **Source Path**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/`
+- **Source Path**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/`
 - **Files Identified**: 4 files (27,215 bytes total)
   - `server.py` - Main MCP server (21,555 bytes)
   - `requirements.txt` - Dependencies (11 bytes)
@@ -39,7 +39,7 @@ The AGI MCP Server has been successfully deployed from Mac Studio to the local s
 
 ### ✅ Phase 3: Dependency Verification (09:42)
 - **MCP SDK**: Version 1.16.0 installed ✓
-  - Location: `/Users/marc/.local/python-3.14/lib/python3.14/site-packages/mcp/`
+  - Location: `${HOME}/.local/python-3.14/lib/python3.14/site-packages/mcp/`
   - Requirement: `mcp>=0.9.0` (satisfied)
 - **Python**: Version 3.14 ✓
 - **AGI Components**: All 6 components import successfully ✓
@@ -97,7 +97,7 @@ Configuration added:
   "agi-mcp": {
     "command": "python3",
     "args": [
-      "/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py"
+      "${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py"
     ],
     "description": "AGI System - Meta-learning, multi-agent coordination, skill evolution, goal decomposition, context synthesis, and Darwin Gödel self-improvement (21 tools)"
   }
@@ -167,10 +167,10 @@ Integration Layer
 ## File Locations
 
 ### Primary Files (SSDRAID0 - Hot Tier)
-- **Server**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py`
-- **Tests**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/test_tools.py`
-- **Docs**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/README.md`
-- **Requirements**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/requirements.txt`
+- **Server**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py`
+- **Tests**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/test_tools.py`
+- **Docs**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/README.md`
+- **Requirements**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/requirements.txt`
 
 ### Backup Files (FILES - Cold Tier)
 - **Backup Location**: `/Volumes/FILES/agentic-system/mcp-servers/agi-mcp/`
@@ -181,9 +181,9 @@ Integration Layer
 - **Config Backup**: `~/.claude.json.backup.20251112_094400`
 
 ### Documentation (New)
-- **Installation Report**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md`
-- **Tools Reference**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/TOOLS_REFERENCE.md`
-- **Deployment Report**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/DEPLOYMENT_REPORT.md`
+- **Installation Report**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md`
+- **Tools Reference**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/TOOLS_REFERENCE.md`
+- **Deployment Report**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/DEPLOYMENT_REPORT.md`
 
 ---
 
@@ -368,15 +368,15 @@ for task in goal.tasks:
 ```bash
 python3 -c "
 import json
-with open('/Users/marc/.claude.json') as f:
+with open('${HOME}/.claude.json') as f:
     config = json.load(f)
-    print('agi-mcp' in config['projects']['/Users/marc']['mcpServers'])
+    print('agi-mcp' in config['projects']['${HOME}']['mcpServers'])
 "
 ```
 
 **Check 2**: Test server standalone
 ```bash
-python3 /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
+python3 ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
 # Should start without errors (Ctrl+C to exit)
 ```
 
@@ -389,13 +389,13 @@ python3 /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
 
 **Check imports**:
 ```bash
-cd /Volumes/SSDRAID0/agentic-system/intelligent-agents
+cd ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/intelligent-agents
 python3 -c "from meta_learning_engine import MetaLearningEngine; print('✓')"
 ```
 
 **Run test suite**:
 ```bash
-cd /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp
+cd ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp
 python3 test_tools.py
 # Should show all 21 tools passing
 ```
@@ -404,14 +404,14 @@ python3 test_tools.py
 
 **Check database paths**:
 ```bash
-ls -lh /Volumes/SSDRAID0/agentic-system/databases/
+ls -lh ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/
 # Should show accessible database files
 ```
 
 **Verify permissions**:
 ```bash
-touch /Volumes/SSDRAID0/agentic-system/databases/test.db
-rm /Volumes/SSDRAID0/agentic-system/databases/test.db
+touch ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/test.db
+rm ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/test.db
 # Should succeed
 ```
 
@@ -424,7 +424,7 @@ If issues occur, rollback is simple:
 ### Restore Configuration
 ```bash
 # Restore config backup
-cp /Users/marc/.claude.json.backup.20251112_094400 /Users/marc/.claude.json
+cp ${HOME}/.claude.json.backup.20251112_094400 ${HOME}/.claude.json
 
 # Restart Claude Code
 ```
@@ -434,10 +434,10 @@ cp /Users/marc/.claude.json.backup.20251112_094400 /Users/marc/.claude.json
 # Backup is already in place, just remove from config
 python3 -c "
 import json
-with open('/Users/marc/.claude.json', 'r') as f:
+with open('${HOME}/.claude.json', 'r') as f:
     config = json.load(f)
-del config['projects']['/Users/marc']['mcpServers']['agi-mcp']
-with open('/Users/marc/.claude.json', 'w') as f:
+del config['projects']['${HOME}']['mcpServers']['agi-mcp']
+with open('${HOME}/.claude.json', 'w') as f:
     json.dump(config, f, indent=2)
 "
 ```
@@ -453,7 +453,7 @@ with open('/Users/marc/.claude.json', 'w') as f:
 - Darwin Gödel modifications require formal verification
 
 ### Data Access
-- Limited to `/Volumes/SSDRAID0/agentic-system/` paths
+- Limited to `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/` paths
 - Database access controlled by file permissions
 - No network access (stdio transport)
 - Memory isolation per component
@@ -473,7 +473,7 @@ with open('/Users/marc/.claude.json', 'w') as f:
 **Weekly**:
 - Review `agi_get_learning_summary()` for meta-learning health
 - Check `agi_get_improvement_history()` for self-modifications
-- Monitor database sizes in `/Volumes/SSDRAID0/agentic-system/databases/`
+- Monitor database sizes in `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/`
 
 **Monthly**:
 - Run full test suite: `python3 test_tools.py`

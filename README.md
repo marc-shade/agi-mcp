@@ -139,7 +139,7 @@ agi_propose_modification(
     "agi-mcp": {
       "command": "python3",
       "args": [
-        "/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py"
+        "${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py"
       ],
       "description": "AGI System - Meta-learning, multi-agent coordination, skill evolution, goal decomposition, context synthesis, and Darwin Gödel self-improvement"
     }
@@ -178,10 +178,10 @@ Databases + Enhanced Memory + SAFLA
 
 ```bash
 # Test imports
-python3 -c "import sys; sys.path.insert(0, '/Volumes/SSDRAID0/agentic-system/intelligent-agents'); from meta_learning_engine import *; from multi_agent_coordinator import *; print('✓ All imports successful')"
+python3 -c "import sys; sys.path.insert(0, '${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/intelligent-agents'); from meta_learning_engine import *; from multi_agent_coordinator import *; print('✓ All imports successful')"
 
 # Test server startup
-python3 /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
+python3 ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
 ```
 
 ## Status
