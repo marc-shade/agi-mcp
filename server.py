@@ -60,23 +60,149 @@ darwin_godel.set_baseline()
 # Create MCP server
 app = Server("agi-mcp")
 
+TOOL_SCHEMAS: Dict[str, Dict[str, Any]] = {
+    "agi_record_outcome": {
+        "type": "object",
+        "properties": {
+            "task_id": {"type": "string"},
+            "task_type": {"type": "string"},
+            "agent_used": {"type": "string"},
+            "success": {"type": "boolean"},
+            "execution_time_ms": {"type": "integer"},
+            "quality_score": {"type": "number"},
+            "error_message": {"type": "string"},
+            "context": {"type": "object"},
+        },
+        "required": ["task_id", "task_type", "agent_used", "success", "execution_time_ms"],
+    },
+    "agi_recommend_agent": {
+        "type": "object",
+        "properties": {
+            "task_type": {"type": "string"},
+            "context": {"type": "object"},
+        },
+        "required": ["task_type"],
+    },
+    "agi_detect_patterns": {
+        "type": "object",
+        "properties": {
+            "lookback_days": {"type": "integer", "default": 7},
+        },
+        "required": [],
+    },
+    "agi_get_learning_summary": {"type": "object", "properties": {}, "required": []},
+    "agi_execute_task": {
+        "type": "object",
+        "properties": {
+            "description": {"type": "string"},
+            "task_type": {"type": "string", "default": "general"},
+        },
+        "required": ["description"],
+    },
+    "agi_get_system_status": {"type": "object", "properties": {}, "required": []},
+    "agi_register_skill": {
+        "type": "object",
+        "properties": {
+            "skill_name": {"type": "string"},
+            "code": {"type": "string"},
+            "description": {"type": "string", "default": ""},
+            "version": {"type": "string"},
+        },
+        "required": ["skill_name", "code"],
+    },
+    "agi_start_ab_test": {
+        "type": "object",
+        "properties": {
+            "skill_name": {"type": "string"},
+            "version_a": {"type": "string"},
+            "version_b": {"type": "string"},
+            "split_ratio": {"type": "number", "default": 0.5},
+        },
+        "required": ["skill_name", "version_a", "version_b"],
+    },
+    "agi_promote_skill": {
+        "type": "object",
+        "properties": {
+            "skill_name": {"type": "string"},
+            "version": {"type": "string"},
+        },
+        "required": ["skill_name", "version"],
+    },
+    "agi_execute_goal": {
+        "type": "object",
+        "properties": {
+            "goal_description": {"type": "string"},
+            "context": {"type": "object"},
+        },
+        "required": ["goal_description"],
+    },
+    "agi_get_goal_progress": {
+        "type": "object",
+        "properties": {
+            "goal_id": {"type": "string"},
+        },
+        "required": ["goal_id"],
+    },
+    "agi_synthesize_context": {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string"},
+            "source_types": {"type": "array", "items": {"type": "string"}},
+            "target_tokens": {"type": "integer"},
+        },
+        "required": ["query"],
+    },
+    "agi_propose_modification": {
+        "type": "object",
+        "properties": {
+            "code_before": {"type": "string"},
+            "code_after": {"type": "string"},
+            "modification_type": {
+                "type": "string",
+                "enum": ["algorithm_improve", "data_structure", "interface", "optimization"],
+            },
+            "description": {"type": "string"},
+        },
+        "required": ["code_before", "code_after", "modification_type", "description"],
+    },
+    "agi_apply_modification": {
+        "type": "object",
+        "properties": {
+            "modification_id": {"type": "string"},
+        },
+        "required": ["modification_id"],
+    },
+    "agi_get_improvement_history": {
+        "type": "object",
+        "properties": {
+            "limit": {"type": "integer", "default": 10},
+        },
+        "required": [],
+    },
+}
+
+TOOL_DEFINITIONS = [
+    ("agi_record_outcome", "Record a task outcome for meta-learning"),
+    ("agi_recommend_agent", "Recommend the best agent for a task type"),
+    ("agi_detect_patterns", "Detect patterns in recent task executions"),
+    ("agi_get_learning_summary", "Summarize meta-learning system state"),
+    ("agi_execute_task", "Execute a task using multi-agent coordination"),
+    ("agi_get_system_status", "Report multi-agent coordinator status"),
+    ("agi_register_skill", "Register a new skill version for evolution"),
+    ("agi_start_ab_test", "Start an A/B test between two skill versions"),
+    ("agi_promote_skill", "Promote a skill version to production"),
+    ("agi_execute_goal", "Decompose and execute a natural language goal"),
+    ("agi_get_goal_progress", "Get progress for a decomposed goal"),
+    ("agi_synthesize_context", "Synthesize multi-source context for a query"),
+    ("agi_propose_modification", "Propose a self-modification with proof status"),
+    ("agi_apply_modification", "Apply a verified self-modification"),
+    ("agi_get_improvement_history", "List recent self-improvement history"),
+]
+
 # Tools metadata so tools/list responds correctly
 TOOLS: List[Tool] = [
-    Tool(name="agi_record_outcome", description="Record a task outcome for meta-learning"),
-    Tool(name="agi_recommend_agent", description="Recommend the best agent for a task type"),
-    Tool(name="agi_detect_patterns", description="Detect patterns in recent task executions"),
-    Tool(name="agi_get_learning_summary", description="Summarize meta-learning system state"),
-    Tool(name="agi_execute_task", description="Execute a task using multi-agent coordination"),
-    Tool(name="agi_get_system_status", description="Report multi-agent coordinator status"),
-    Tool(name="agi_register_skill", description="Register a new skill version for evolution"),
-    Tool(name="agi_start_ab_test", description="Start an A/B test between two skill versions"),
-    Tool(name="agi_promote_skill", description="Promote a skill version to production"),
-    Tool(name="agi_execute_goal", description="Decompose and execute a natural language goal"),
-    Tool(name="agi_get_goal_progress", description="Get progress for a decomposed goal"),
-    Tool(name="agi_synthesize_context", description="Synthesize multi-source context for a query"),
-    Tool(name="agi_propose_modification", description="Propose a self-modification with proof status"),
-    Tool(name="agi_apply_modification", description="Apply a verified self-modification"),
-    Tool(name="agi_get_improvement_history", description="List recent self-improvement history"),
+    Tool(name=name, description=desc, inputSchema=TOOL_SCHEMAS[name])
+    for name, desc in TOOL_DEFINITIONS
 ]
 
 
