@@ -60,6 +60,32 @@ darwin_godel.set_baseline()
 # Create MCP server
 app = Server("agi-mcp")
 
+# Tools metadata so tools/list responds correctly
+TOOLS: List[Tool] = [
+    Tool(name="agi_record_outcome", description="Record a task outcome for meta-learning"),
+    Tool(name="agi_recommend_agent", description="Recommend the best agent for a task type"),
+    Tool(name="agi_detect_patterns", description="Detect patterns in recent task executions"),
+    Tool(name="agi_get_learning_summary", description="Summarize meta-learning system state"),
+    Tool(name="agi_execute_task", description="Execute a task using multi-agent coordination"),
+    Tool(name="agi_get_system_status", description="Report multi-agent coordinator status"),
+    Tool(name="agi_register_skill", description="Register a new skill version for evolution"),
+    Tool(name="agi_start_ab_test", description="Start an A/B test between two skill versions"),
+    Tool(name="agi_promote_skill", description="Promote a skill version to production"),
+    Tool(name="agi_execute_goal", description="Decompose and execute a natural language goal"),
+    Tool(name="agi_get_goal_progress", description="Get progress for a decomposed goal"),
+    Tool(name="agi_synthesize_context", description="Synthesize multi-source context for a query"),
+    Tool(name="agi_propose_modification", description="Propose a self-modification with proof status"),
+    Tool(name="agi_apply_modification", description="Apply a verified self-modification"),
+    Tool(name="agi_get_improvement_history", description="List recent self-improvement history"),
+]
+
+
+@app.list_tools()
+async def list_tools() -> List[Tool]:
+    """Return the list of available AGI tools."""
+    return TOOLS
+
+
 # ============================================================================
 # META-LEARNING TOOLS
 # ============================================================================
