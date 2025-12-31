@@ -47,7 +47,7 @@ INSTALLATION PROCESS
 ═══════════════════════════════════════════════════════════════════════════════
 
 PHASE 1: Source Verification ✓
-  • Located source at: ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/
+  • Located source at: /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/
   • Verified 4 source files (27,215 bytes total)
   • Confirmed all dependencies present
 
@@ -91,16 +91,16 @@ FILES CREATED & MODIFIED
 ═══════════════════════════════════════════════════════════════════════════════
 
 CREATED FILES:
-  ✓ ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/test_tools.py
-  ✓ ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md
-  ✓ ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/TOOLS_REFERENCE.md
-  ✓ ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/DEPLOYMENT_REPORT.md
-  ✓ ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/SUMMARY.txt
+  ✓ /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/test_tools.py
+  ✓ /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md
+  ✓ /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/TOOLS_REFERENCE.md
+  ✓ /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/DEPLOYMENT_REPORT.md
+  ✓ /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/SUMMARY.txt
   ✓ /Volumes/FILES/agentic-system/mcp-servers/agi-mcp/* (complete backup)
-  ✓ ${HOME}/.claude.json.backup.20251112_094400
+  ✓ /Users/marc/.claude.json.backup.20251112_094400
 
 MODIFIED FILES:
-  ✓ ${HOME}/.claude.json (added agi-mcp configuration)
+  ✓ /Users/marc/.claude.json (added agi-mcp configuration)
 
 ═══════════════════════════════════════════════════════════════════════════════
 CONFIGURATION DETAILS
@@ -111,7 +111,7 @@ ADDED TO ~/.claude.json:
   "agi-mcp": {
     "command": "python3",
     "args": [
-      "${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py"
+      "/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py"
     ],
     "description": "AGI System - Meta-learning, multi-agent coordination, 
                     skill evolution, goal decomposition, context synthesis, 
@@ -251,14 +251,14 @@ ROLLBACK INSTRUCTIONS
 If you need to rollback this installation:
 
 RESTORE CONFIGURATION:
-  cp ${HOME}/.claude.json.backup.20251112_094400 ~/.claude.json
+  cp /Users/marc/.claude.json.backup.20251112_094400 ~/.claude.json
 
 RESTART CLAUDE CODE:
   Exit and restart to reload previous configuration
 
 SOURCE FILES PRESERVED:
   Original files remain at:
-  ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/
+  /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/
   
   Backup available at:
   /Volumes/FILES/agentic-system/mcp-servers/agi-mcp/
@@ -272,24 +272,24 @@ ISSUE: Server not appearing after restart
   SOLUTION 1: Verify configuration
     python3 -c "
     import json
-    with open('${HOME}/.claude.json') as f:
+    with open('/Users/marc/.claude.json') as f:
         config = json.load(f)
-    print('agi-mcp' in config['projects']['${HOME}']['mcpServers'])
+    print('agi-mcp' in config['projects']['/Users/marc']['mcpServers'])
     "
   
   SOLUTION 2: Test server standalone
-    python3 ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
+    python3 /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
     # Should start without errors (Ctrl+C to exit)
 
 ISSUE: Tool execution errors
   
   SOLUTION 1: Run test suite
-    cd ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp
+    cd /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp
     python3 test_tools.py
     # Should show all 21 tools passing
   
   SOLUTION 2: Check component imports
-    cd ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/intelligent-agents
+    cd /Volumes/SSDRAID0/agentic-system/intelligent-agents
     python3 -c "from meta_learning_engine import MetaLearningEngine; print('✓')"
 
 For additional troubleshooting, see INSTALLATION.md
@@ -305,13 +305,13 @@ DOCUMENTATION:
   • README.md - Usage guide and patterns
 
 TEST SCRIPT:
-  ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/test_tools.py
+  /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/test_tools.py
 
 SOURCE CODE:
-  ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
+  /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
 
 AGI COMPONENTS:
-  ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/intelligent-agents/
+  /Volumes/SSDRAID0/agentic-system/intelligent-agents/
     • meta_learning_engine.py
     • multi_agent_coordinator.py
     • skill_evolution_system.py
@@ -350,7 +350,7 @@ WORKS WITH:
   • SQLite Databases - Task outcomes and metrics
 
 DATA LOCATIONS:
-  • Databases: ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/
+  • Databases: /Volumes/SSDRAID0/agentic-system/databases/
   • Logs: Standard error (stderr for stdio transport)
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -364,7 +364,7 @@ EXECUTION SAFETY:
   ✓ Darwin Gödel modifications require formal proofs
 
 DATA SAFETY:
-  ✓ Limited to ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/ paths
+  ✓ Limited to /Volumes/SSDRAID0/agentic-system/ paths
   ✓ Database access controlled by file permissions
   ✓ No network access (stdio transport)
   ✓ Memory isolation per component

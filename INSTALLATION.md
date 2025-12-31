@@ -11,7 +11,7 @@ The AGI MCP Server has been successfully installed and configured on Mac Studio.
 ## What Was Done
 
 ### 1. Source Verification ✓
-- **Source Path**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/`
+- **Source Path**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/`
 - **Files Found**:
   - `server.py` (21,555 bytes) - Main MCP server implementation
   - `requirements.txt` (11 bytes) - Dependency list
@@ -27,7 +27,7 @@ The AGI MCP Server has been successfully installed and configured on Mac Studio.
 ### 3. Dependencies Verified ✓
 - **MCP SDK**: Version 1.16.0 (requirement: >=0.9.0) ✓
 - **Python**: 3.14 ✓
-- **Location**: `${HOME}/.local/python-3.14/lib/python3.14/site-packages/mcp/`
+- **Location**: `/Users/marc/.local/python-3.14/lib/python3.14/site-packages/mcp/`
 
 ### 4. AGI Component Imports Tested ✓
 All 6 AGI components successfully imported and initialized:
@@ -79,7 +79,7 @@ Created and executed comprehensive test script: `test_tools.py`
   "agi-mcp": {
     "command": "python3",
     "args": [
-      "${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py"
+      "/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py"
     ],
     "description": "AGI System - Meta-learning, multi-agent coordination, skill evolution, goal decomposition, context synthesis, and Darwin Gödel self-improvement (21 tools)"
   }
@@ -111,7 +111,7 @@ Enhanced Memory + SAFLA + Databases
 - **Enhanced Memory MCP**: Persistent storage for learnings
 - **Agent Runtime MCP**: Persistent tasks and goals
 - **SAFLA**: 4-tier hybrid memory architecture
-- **Databases**: SQLite databases in `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/databases/`
+- **Databases**: SQLite databases in `/Volumes/SSDRAID0/agentic-system/databases/`
 
 ## Verification Results
 
@@ -167,13 +167,13 @@ All components initialized without errors.
 ## Files Created/Modified
 
 ### Created Files
-1. `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/test_tools.py` - Tool validation script
+1. `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/test_tools.py` - Tool validation script
 2. `/Volumes/FILES/agentic-system/mcp-servers/agi-mcp/*` - Backup copy (4 files)
-3. `${HOME}/.claude.json.backup.20251112_094400` - Config backup
-4. `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md` - This file
+3. `/Users/marc/.claude.json.backup.20251112_094400` - Config backup
+4. `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/INSTALLATION.md` - This file
 
 ### Modified Files
-1. `${HOME}/.claude.json` - Added agi-mcp server configuration
+1. `/Users/marc/.claude.json` - Added agi-mcp server configuration
 
 ## Next Steps
 
@@ -226,20 +226,20 @@ See `README.md` for detailed usage examples and patterns for each tool category.
 
 ## Support Files
 
-- **Main Server**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py`
-- **Documentation**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/README.md`
-- **Test Script**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/test_tools.py`
-- **Requirements**: `${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/requirements.txt`
+- **Main Server**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py`
+- **Documentation**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/README.md`
+- **Test Script**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/test_tools.py`
+- **Requirements**: `/Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/requirements.txt`
 
 ## Troubleshooting
 
 ### Server Won't Start
 ```bash
 # Test standalone
-python3 ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
+python3 /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
 
 # Check imports
-cd ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/intelligent-agents
+cd /Volumes/SSDRAID0/agentic-system/intelligent-agents
 python3 -c "from meta_learning_engine import MetaLearningEngine; print('✓')"
 ```
 
@@ -248,16 +248,16 @@ python3 -c "from meta_learning_engine import MetaLearningEngine; print('✓')"
 # Verify configuration
 python3 -c "
 import json
-with open('${HOME}/.claude.json') as f:
+with open('/Users/marc/.claude.json') as f:
     config = json.load(f)
-    print('agi-mcp' in config['projects']['${HOME}']['mcpServers'])
+    print('agi-mcp' in config['projects']['/Users/marc']['mcpServers'])
 "
 ```
 
 ### Permission Issues
 ```bash
 # Ensure execute permissions
-chmod +x ${AGENTIC_SYSTEM_PATH:-/opt/agentic}/agentic-system/mcp-servers/agi-mcp/server.py
+chmod +x /Volumes/SSDRAID0/agentic-system/mcp-servers/agi-mcp/server.py
 ```
 
 ## Installation Log
